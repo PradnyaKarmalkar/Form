@@ -10,9 +10,10 @@ CORS(app)  # Enable CORS for all routes
 # Database configuration - update these values with your actual database info
 db_config = {
     'host': 'localhost',
-    'user': 'your_username',
-    'password': 'your_password',
-    'database': 'your_database'
+    'port': 3306,
+    'user': 'root',
+    'password': 'Pradnya@19',
+    'database': 'form'
 }
 
 # Route to save form data
@@ -26,8 +27,11 @@ def save_form_data():
         return jsonify({'status': 'error', 'message': 'Missing required fields'}), 400
     
     try:
+        print(db_config)
         # Connect to database
         conn = mysql.connector.connect(**db_config)
+        if conn:
+            print("Connected to DB")
         cursor = conn.cursor()
         
         # Execute query
